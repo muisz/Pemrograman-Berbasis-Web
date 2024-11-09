@@ -8,8 +8,6 @@
 ![Capture](https://github.com/user-attachments/assets/073949e2-da49-4fcc-8c57-ec5808e0e402)
 
 
-## Controllers
-
 ```
 <?php
 
