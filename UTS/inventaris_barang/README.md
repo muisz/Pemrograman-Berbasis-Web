@@ -1,3 +1,158 @@
+## Screenshot
+
+
+![Captureasdsad](https://github.com/user-attachments/assets/7311ba61-59c8-436c-a594-548c4d654307)
+
+![Captureasdsa](https://github.com/user-attachments/assets/45f0778c-0b22-4645-b78d-168d9a3310df)
+
+![Capture](https://github.com/user-attachments/assets/073949e2-da49-4fcc-8c57-ec5808e0e402)
+
+
+## Controllers
+
+```
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Item;
+
+class ItemController extends Controller
+{
+    public function index(Request $request) {
+        $filter_category = $request->query('category');
+        if ($filter_category) {
+            $items = Item::where('category', $filter_category)->get();
+        } else {
+            $items = Item::all();
+        }
+
+        $categories = Item::distinct()->pluck('category');
+        return view('index')
+            ->with("items", $items)
+            ->with('categories', $categories);
+    }
+
+    public function add(Request $request) {
+        return view('add');
+    }
+
+    public function addItem(Request $request) { 
+        $item = new Item();
+        $item->item_name = $request->item_name;
+        $item->category = $request->category;
+        $item->quantity = $request->quantity;
+        $item->supplier = $request->supplier;
+        $item->received_date = $request->received_date;
+        $item->save();
+        return redirect()->route('list');
+    }
+
+    public function delete(Request $request) {
+        $item = Item::find($request->id);
+        $item->delete();
+        return redirect()->route('list');
+    }
+
+    public function detail(Request $request) {
+        $item = Item::find($request->id);
+        return view('detail')
+            ->with('item', $item)
+            ->with('is_edit_mode', $request->query('edit'));
+    }
+
+    public function edit(Request $request) {
+        $item = Item::find($request->id);
+        $item->update([
+            'item_name' => $request->item_name,
+            'category' => $request->category,
+            'quantity' => $request->quantity,
+            'supplier' => $request->supplier,
+            'received_date' => $request->received_date,
+        ]);
+        return redirect()->route('list');
+    }
+}
+
+```
+
+```
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ItemController;
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', [ItemController::class, 'index'])->name('list');
+Route::get('/add', [ItemController::class, 'add']);
+Route::post('/add', [ItemController::class, 'addItem']);
+Route::get('/detail/{id}', [ItemController::class, 'detail']);
+Route::get('/delete/{id}', [ItemController::class, 'delete']);
+Route::post('/edit/{id}', [ItemController::class, 'edit']);
+```
+
+```
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+class Item extends Model
+{
+    use HasFactory;
+    protected $fillable = [
+        'item_name',
+        'category',
+        'quantity',
+        'supplier',
+        'received_date',
+    ];
+}
+
+```
+
+```
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('items', function (Blueprint $table) {
+            $table->id();
+            $table->string('item_name');
+            $table->string('category');
+            $table->integer('quantity');
+            $table->string('supplier');
+            $table->date('received_date');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('items');
+    }
+};
+
+```
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
