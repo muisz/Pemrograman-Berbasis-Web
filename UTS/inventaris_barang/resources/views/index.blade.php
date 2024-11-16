@@ -1,16 +1,16 @@
 @extends('base')
 
 @section('content')
-<div class="container">
+<div class="">
     <div class="row mt-2">
         <div class="col">
-            <h5>Daftar Inventaris Barang</h5>
+            <h5 class="text-lg font-semibold">Daftar Inventaris Barang</h5>
         </div>
         <div class="col text-end">
             <a href="/add"><button type="button" class="btn btn-primary">Tambah Item</button></a>
         </div>
     </div>
-    <div class="mt-2" style="display: flex; gap: 10px;">
+    <div class="mt-4" style="display: flex; gap: 10px;">
         <select class="form-select" aria-label="Filter category" style="width: 300px" id="filter-category">
             <option selected value="0">Pilih Kategori</option>
             @foreach ($categories as $category)
@@ -19,7 +19,7 @@
         </select>
         <button type="button" class="btn btn-secondary" id="apply-filter">Terapkan Filter</button>
     </div>
-    <table class="table mt-2">
+    <table class="table mt-4">
         <thead>
             <tr>
                 <th scope="col">Id</th>

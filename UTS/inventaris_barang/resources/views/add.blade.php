@@ -1,8 +1,8 @@
 @extends('base')
 
 @section('content')
-<div class="container mt-2">
-    <h5 class="text-center">Tambah Daftar Barang</h5>
+<div class="">
+    <h5 class="text-center font-semibold text-lg">Tambah Daftar Barang</h5>
     <form method="POST" action="/add">
         @csrf
         <div class="mb-3">

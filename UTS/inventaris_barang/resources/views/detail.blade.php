@@ -1,8 +1,8 @@
 @extends('base')
 
 @section('content')
-<div class="container mt-2">
-    <h5 class="text-center">
+<div class="">
+    <h5 class="text-center text-lg font-semibold">
         @if ($is_edit_mode == 'true')
         Ubah Barang
         @else
