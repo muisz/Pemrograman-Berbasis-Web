@@ -7,25 +7,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     @vite('resources/css/app.css')
   </head>
-  <body>
-    <div class="h-screen w-full">
-      <div class="bg-slate-700 h-[200px] w-full absolute top-0 z-[-10]"></div>
-
-      <div class="w-[90%] m-auto my-3">
-        <div class="flex items-center justify-between">
-          <h2 class="text-white font-semibold text-lg">Aplikasi Inventaris</h2>
-          <a href="/logout"><button type="button" class="btn btn-danger btn-sm">Keluar</button></a>
-        </div>
-
-        <div class="mt-4">
-          <h1 class="text-white font-semibold text-xl">Hi, Muis</h1>
-          <p class="text-slate-400 text-sm">Selamat beraktivitas</p>
-        </div>
-
-        <div class="mt-4 bg-white p-3 rounded-lg border">
+  <body class="h-screen w-full">
+    <div class="h-full w-full bg-slate-700 flex items-center justify-center">
+        <div class="bg-white w-[450px] p-3 rounded-lg">
             @yield('content')
         </div>
-      </div>
     </div>
 
     
