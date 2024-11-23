@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use Illuminate\Support\Facades\Session;
 
 class ItemController extends Controller
 {
     public function index(Request $request) {
+        if (!$this->is_authenticated()) {
+            return redirect()->route('login');
+        }
+
         $filter_category = $request->query('category');
         if ($filter_category) {
             $items = Item::where('category', $filter_category)->get();
@@ -22,6 +27,9 @@ class ItemController extends Controller
     }
 
     public function add(Request $request) {
+        if (!$this->is_authenticated()) {
+            return redirect()->route('login');
+        }
         return view('add');
     }
 
@@ -43,6 +51,9 @@ class ItemController extends Controller
     }
 
     public function detail(Request $request) {
+        if (!$this->is_authenticated()) {
+            return redirect()->route('login');
+        }
         $item = Item::find($request->id);
         return view('detail')
             ->with('item', $item)
@@ -59,5 +70,13 @@ class ItemController extends Controller
             'received_date' => $request->received_date,
         ]);
         return redirect()->route('list');
+    }
+
+    public function is_authenticated() {
+        if (Session::has('authenticated_user'))
+        {
+            return true;
+        }
+        return false;
     }
 }

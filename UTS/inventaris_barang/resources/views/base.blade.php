@@ -18,7 +18,7 @@
         </div>
 
         <div class="mt-4">
-          <h1 class="text-white font-semibold text-xl">Hi, Muis</h1>
+          <h1 class="text-white font-semibold text-xl">Hi, {{ session('authenticated_user', '') }}</h1>
           <p class="text-slate-400 text-sm">Selamat beraktivitas</p>
         </div>
 

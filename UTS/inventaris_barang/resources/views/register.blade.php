@@ -2,6 +2,9 @@
 
 @section('content')
     <h1 class="text-center font-semibold text-xl">Register</h1>
+    @if (isset($error))
+        <div class="alert alert-danger my-3" role="alert">{{ $error }}</div>
+    @endif
     <form method="POST">
         @csrf
         <div class="mb-3">
