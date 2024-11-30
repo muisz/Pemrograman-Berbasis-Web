@@ -1,5 +1,11 @@
 @extends('base')
 
+@section('menu')
+<a href="/dashboard" class="text-slate-400 font-medium hover:text-slate-300">Dashboard</a>
+<a href="/inventaris" class="text-slate-300 font-medium">Inventaris</a>
+<a href="/users" class="text-slate-400 font-medium hover:text-slate-300">Manajemen Pengguna</a>
+@endsection
+
 @section('content')
 <div class="">
     <h5 class="text-center text-lg font-semibold">
@@ -9,7 +15,7 @@
         Detail Barang
         @endif
     </h5>
-    <form method="POST" action="/edit/{{ $item->id }}">
+    <form method="POST" action="/inventaris/edit/{{ $item->id }}">
         @csrf
         <div class="mb-3">
             <label for="item_name" class="form-label">Nama Item</label>
@@ -55,8 +61,8 @@
         @if ($is_edit_mode == 'true')
             <button type="submit" class="btn btn-primary">Submit</button>
         @else
-            <a href="/detail/{{ $item->id }}?edit=true"><button type="button" class="btn btn-secondary">Edit</button></a>
-            <a href="/delete/{{ $item->id }}"><button type="button" class="btn btn-danger">Hapus</button></a>
+            <a href="/inventaris/detail/{{ $item->id }}?edit=true"><button type="button" class="btn btn-secondary">Edit</button></a>
+            <a href="/inventaris/delete/{{ $item->id }}"><button type="button" class="btn btn-danger">Hapus</button></a>
         @endif
     </form>
 </div>

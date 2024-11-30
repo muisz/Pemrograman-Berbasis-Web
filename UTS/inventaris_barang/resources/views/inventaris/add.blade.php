@@ -1,9 +1,15 @@
 @extends('base')
 
+@section('menu')
+<a href="/dashboard" class="text-slate-400 font-medium hover:text-slate-300">Dashboard</a>
+<a href="/inventaris" class="text-slate-300 font-medium">Inventaris</a>
+<a href="/users" class="text-slate-400 font-medium hover:text-slate-300">Manajemen Pengguna</a>
+@endsection
+
 @section('content')
 <div class="">
     <h5 class="text-center font-semibold text-lg">Tambah Daftar Barang</h5>
-    <form method="POST" action="/add">
+    <form method="POST" action="/inventaris/add">
         @csrf
         <div class="mb-3">
             <label for="item_name" class="form-label">Nama Item</label>

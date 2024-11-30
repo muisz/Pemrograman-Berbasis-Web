@@ -1,5 +1,11 @@
 @extends('base')
 
+@section('menu')
+<a href="/dashboard" class="text-slate-400 font-medium hover:text-slate-300">Dashboard</a>
+<a href="/inventaris" class="text-slate-300 font-medium">Inventaris</a>
+<a href="/users" class="text-slate-400 font-medium hover:text-slate-300">Manajemen Pengguna</a>
+@endsection
+
 @section('content')
 <div class="">
     <div class="row mt-2">
@@ -7,7 +13,7 @@
             <h5 class="text-lg font-semibold">Daftar Inventaris Barang</h5>
         </div>
         <div class="col text-end">
-            <a href="/add"><button type="button" class="btn btn-primary">Tambah Item</button></a>
+            <a href="/inventaris/add"><button type="button" class="btn btn-primary">Tambah Item</button></a>
         </div>
     </div>
     <div class="mt-4" style="display: flex; gap: 10px;">
@@ -35,14 +41,14 @@
             @foreach ($items as $item)
             <tr>
                 <td>{{ $item->id }}</td>
-                <td><a href="/detail/{{ $item->id }}">{{ $item->item_name }}</a></td>
+                <td><a href="/inventaris/detail/{{ $item->id }}">{{ $item->item_name }}</a></td>
                 <td>{{ $item->category }}</td>
                 <td>{{ $item->quantity }}</td>
                 <td>{{ $item->supplier }}</td>
                 <td>{{ $item->received_date }}</td>
                 <td>
-                    <a href="/detail/{{ $item->id }}?edit=true"><button type="button" class="btn btn-secondary btn-sm">Edit</button></a>
-                    <a href="/delete/{{ $item->id }}"><button type="button" class="btn btn-danger btn-sm">Hapus</button></a>
+                    <a href="/inventaris/detail/{{ $item->id }}?edit=true"><button type="button" class="btn btn-secondary btn-sm">Edit</button></a>
+                    <a href="/inventaris/delete/{{ $item->id }}"><button type="button" class="btn btn-danger btn-sm">Hapus</button></a>
                 </td>
             </tr>
             @endforeach

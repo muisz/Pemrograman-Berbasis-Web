@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Item;
 use Illuminate\Support\Facades\Session;
 
-class ItemController extends Controller
+class InventarisController extends Controller
 {
     public function index(Request $request) {
         if (!$this->is_authenticated()) {
@@ -21,7 +20,7 @@ class ItemController extends Controller
         }
 
         $categories = Item::distinct()->pluck('category');
-        return view('inventaris.index')
+        return view('dashboard.inventaris.index')
             ->with("items", $items)
             ->with('categories', $categories);
     }
@@ -30,7 +29,7 @@ class ItemController extends Controller
         if (!$this->is_authenticated()) {
             return redirect()->route('login');
         }
-        return view('inventaris.add');
+        return view('dashboard.inventaris.add');
     }
 
     public function addItem(Request $request) { 
@@ -41,13 +40,13 @@ class ItemController extends Controller
         $item->supplier = $request->supplier;
         $item->received_date = $request->received_date;
         $item->save();
-        return redirect()->route('list');
+        return redirect()->route('dashboard.inventaris.index');
     }
 
     public function delete(Request $request) {
         $item = Item::find($request->id);
         $item->delete();
-        return redirect()->route('list');
+        return redirect()->route('dashboard.inventaris.index');
     }
 
     public function detail(Request $request) {
@@ -55,7 +54,7 @@ class ItemController extends Controller
             return redirect()->route('login');
         }
         $item = Item::find($request->id);
-        return view('inventaris.detail')
+        return view('detail')
             ->with('item', $item)
             ->with('is_edit_mode', $request->query('edit'));
     }
@@ -69,7 +68,7 @@ class ItemController extends Controller
             'supplier' => $request->supplier,
             'received_date' => $request->received_date,
         ]);
-        return redirect()->route('list');
+        return redirect()->route('dashboard.inventaris.index');
     }
 
     public function is_authenticated() {
@@ -80,3 +79,5 @@ class ItemController extends Controller
         return false;
     }
 }
+
+?>

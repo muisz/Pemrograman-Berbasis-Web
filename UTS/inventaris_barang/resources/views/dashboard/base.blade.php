@@ -5,32 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Inventaris Barang</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     @vite('resources/css/app.css')
   </head>
   <body>
-    <div class="h-screen w-full">
-      <div class="bg-slate-700 h-[200px] w-full absolute top-0 z-[-10]"></div>
+    <div class="h-screen w-full bg-slate-900 flex">
 
-      <div class="w-[90%] m-auto my-3">
-        <div class="flex items-center justify-between">
-          <h2 class="text-white font-semibold text-lg">Aplikasi Inventaris</h2>
-          <div class="flex items-center gap-5">
-            <div class="flex items-center gap-3">
-              @yield('menu')
+        @yield('menu')
+
+        <div class="flex-1 px-3">
+            <div class="h-[80px] flex items-center justify-between">
+                @yield('page-header')
+                <h3 class="text-slate-400 font-medium">Muhamad Abdul Muis</h3>
             </div>
-            <a href="/logout"><button type="button" class="btn btn-danger btn-sm">Keluar</button></a>
-          </div>
-        </div>
 
-        <div class="mt-4">
-          <h1 class="text-white font-semibold text-xl">Hi, {{ session('authenticated_user', '') }}</h1>
-          <p class="text-slate-400 text-sm">Selamat beraktivitas</p>
+            <div class="bg-white p-3 rounded-xl">
+                @yield('content')
+            </div>
         </div>
-
-        <div class="mt-4 bg-white p-3 rounded-lg border">
-            @yield('content')
-        </div>
-      </div>
     </div>
 
     
