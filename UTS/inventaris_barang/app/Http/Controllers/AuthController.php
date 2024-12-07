@@ -30,7 +30,11 @@ class AuthController extends Controller
             return view('login')->with('error', 'Akun tidak ditemukan');
         }
 
-        session(['authenticated_user' => $user->name]);
+        session([
+            'authenticated_user' => $user->name,
+            'authenticated_user_id' => $user->id,
+            'authenticated_user_role' => $user->role
+        ]);
         return redirect()->route('list');
     }
 
@@ -47,7 +51,11 @@ class AuthController extends Controller
         $user->password = $request->password;
         $user->save();
 
-        session(['authenticated_user' => $user->name]);
+        session([
+            'authenticated_user' => $user->name,
+            'authenticated_user_id' => $user->id,
+            'authenticated_user_role' => $user->role
+        ]);
         return redirect()->route('list');
     }
 

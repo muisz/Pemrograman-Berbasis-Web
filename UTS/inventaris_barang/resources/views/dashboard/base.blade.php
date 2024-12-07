@@ -9,22 +9,21 @@
     @vite('resources/css/app.css')
   </head>
   <body>
-    <div class="h-screen w-full bg-slate-900 flex">
-
+    <div class="h-screen w-full bg-slate-200 flex">
+      <div class="w-[220px] bg-green-900 flex flex-col p-3">
         @yield('menu')
-
-        <div class="flex-1 px-3">
-            <div class="h-[80px] flex items-center justify-between">
-                @yield('page-header')
-                <h3 class="text-slate-400 font-medium">Muhamad Abdul Muis</h3>
-            </div>
-
-            <div class="bg-white p-3 rounded-xl">
-                @yield('content')
-            </div>
+        <div class="border-t">
+          <div class="flex items-center">
+            <p class="text-sm mt-2 flex-1"><span class="text-slate-200 font-medium"><a href="/user/myprofile">{{ session('authenticated_user', '') }}</a></span><br /><span class="text-slate-300 font-light">{{ session('authenticated_user_role', '') }}</span></p>
+            <a href="/logout"><i class="fa fa-sign-out text-red-300" aria-hidden="true"></i></a>
+          </div>
         </div>
-    </div>
+      </div>
 
+      <div class="flex-1 p-3">
+        @yield('content')
+      </div>
+    </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

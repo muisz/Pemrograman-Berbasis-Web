@@ -60,7 +60,7 @@
             @if ($is_edit_mode == 'true')
                 <button type="submit" class="btn btn-primary">Submit</button>
             @else
-                <a href="/users/detail/{{ $user->id }}?edit=true"><button type="button" class="btn btn-secondary">Edit</button></a>
+                c
                 <a href="/users/reset/{{ $user->id }}?edit=true"><button type="button" class="btn btn-dark">Reset kata sandi</button></a>
                 <a href="/users/delete/{{ $user->id }}"><button type="button" class="btn btn-danger">Hapus</button></a>
             @endif

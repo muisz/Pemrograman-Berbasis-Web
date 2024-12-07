@@ -14,11 +14,11 @@ class UserController extends Controller
         }
 
         $users = User::all();
-        return view('users.index')->with('users', $users);
+        return view('dashboard.user.index')->with('users', $users);
     }
 
     public function add(Request $request) {
-        return view('users.add');
+        return view('dashboard.user.add');
     }
 
     public function addUser(Request $request) {
@@ -41,7 +41,7 @@ class UserController extends Controller
         }
 
         $user = User::find($request->id);
-        return view('users.detail')
+        return view('dashboard.user.detail')
             ->with('user', $user)
             ->with('is_edit_mode', $request->query('edit'));
     }
@@ -69,6 +69,31 @@ class UserController extends Controller
             'password' => $request->password,
         ]);
         return redirect()->route('detail-user', ['id' => $user->id]);
+    }
+    
+    public function myProfile() {
+        if (!$this->is_authenticated()) {
+            return redirect()->route('login');
+        }
+
+        $user = User::find(Session::get('authenticated_user_id'));
+        return view('dashboard.user.myprofile')
+            ->with('user', $user);
+    }
+
+    public function editMyProfile(Request $request) {
+        if (!$this->is_authenticated()) {
+            return redirect()->route('login');
+        }
+
+        $user = User::find(Session::get('authenticated_user_id'));
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => $request->role,
+            'password' => $request->password,
+        ]);
+        return redirect()->route('my-profile');
     }
 
     public function is_authenticated() {
