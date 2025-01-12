@@ -20,7 +20,7 @@
         </a>
     </li>
     <li>
-        <a href="/items">
+        <a href="/transactions">
             <div class="group flex gap-2 p-2 rounded hover:bg-slate-100">
                 <i class="clipboard check line icon text-slate-200 group-hover:text-slate-800"></i>
                 <span class="text-slate-200 group-hover:font-medium group-hover:text-slate-800">Transaksi</span>

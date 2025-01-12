@@ -21,7 +21,7 @@
             </style>
         @endif
     </head>
-    <body class="font-sans antialiased dark:bg-black dark:text-white/50">
+    <body class="font-sans antialiased dark:bg-black dark:text-white/50 overflow-y-auto">
         
         <div class="h-screen">
             <div class="flex h-full">
@@ -32,7 +32,7 @@
                     <div class="ui clearing divider"></div>
                     @yield('menu')
                 </div>
-                <div class="flex-1">
+                <div class="flex-1 overflow-y-scroll">
                     <div class="flex justify-end p-3">
                         <div class="ui simple dropdown item">
                             <input type="hidden" name="dp" />
@@ -57,6 +57,7 @@
             </div>
         </div>
 
+        <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
         <script type="text/javascript" src="{{ asset('ui/semantic.js') }}"></script>
     </body>
 </html>
