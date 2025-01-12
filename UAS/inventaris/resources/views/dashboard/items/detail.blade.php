@@ -6,7 +6,7 @@
     <li>
         <a href="/dashboard" class="hover:text-none">
             <div class="group flex gap-2 p-2 rounded hover:bg-slate-100">
-                <i class="boxes icon text-slate-200 group-hover:text-slate-800"></i>
+                <i class="chart line icon text-slate-200 group-hover:text-slate-800"></i>
                 <span class="text-slate-200 group-hover:font-medium group-hover:text-slate-800">Dashboard</span>
             </div>
         </a>

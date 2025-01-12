@@ -13,9 +13,9 @@
     </li>
     <li>
         <a href="/items">
-            <div class="group flex gap-2 p-2 rounded bg-slate-100">
-                <i class="boxes icon text-slate-200 text-slate-800"></i>
-                <span class="text-slate-200 font-medium text-slate-800">Items</span>
+            <div class="group flex gap-2 p-2 rounded hover:bg-slate-100">
+                <i class="boxes icon text-slate-200 group-hover:text-slate-800"></i>
+                <span class="text-slate-200 group-hover:font-medium group-hover:text-slate-800">Items</span>
             </div>
         </a>
     </li>
@@ -29,9 +29,9 @@
     </li>
     <li>
         <a href="/suppliers">
-            <div class="group flex gap-2 p-2 rounded hover:bg-slate-100">
-                <i class="warehouse icon text-slate-200 group-hover:text-slate-800"></i>
-                <span class="text-slate-200 group-hover:font-medium group-hover:text-slate-800">Suppliers</span>
+            <div class="group flex gap-2 p-2 rounded bg-slate-100">
+                <i class="warehouse icon text-slate-200 text-slate-800"></i>
+                <span class="text-slate-200 font-medium text-slate-800">Suppliers</span>
             </div>
         </a>
     </li>
@@ -51,9 +51,9 @@
 
 <div class="bg-[#C1272D] p-3 text-white">
     <div class="ui breadcrumb">
-        <div class="section">Items</div>
+        <div class="section">Suppliers</div>
         <div class="divider"> / </div>
-        <div class="active section">Tambah Item</div>
+        <div class="active section">Tambah Supplier</div>
     </div>
 </div>
 
@@ -62,7 +62,7 @@
 @section('content')
 
 <div class="p-3">
-    <h1 class="text-[20px] font-semibold mb-6">Tambah Item</h1>
+    <h1 class="text-[20px] font-semibold mb-6">Tambah Supplier</h1>
 
     <form class="ui form mt-6">
         <div class="field">
@@ -70,12 +70,8 @@
             <input type="text" name="name" placeholder="">
         </div>
         <div class="field">
-            <label>Deskripsi</label>
+            <label>Keterangan</label>
             <textarea></textarea>
-        </div>
-        <div class="field">
-            <label>Kategori</label>
-            <textarea rows="2"></textarea>
         </div>
         <button type="submit" class="ui primary button">Submit</button>
     </form>
