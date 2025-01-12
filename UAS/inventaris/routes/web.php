@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ItemController;
 
 // landing
 Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -12,3 +13,7 @@ Route::get('/reset-password', [AuthController::class, 'reset_password'])->name('
 
 // dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+// items
+Route::get('/items', [ItemController::class, 'index'])->name('items');
+Route::get('/items/{id}', [ItemController::class, 'detail'])->name('detail-item');
