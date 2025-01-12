@@ -45,7 +45,7 @@
                             </div>
                             <div class="menu">
                                 <a href="/profile" class="item w-[150px]">Profil</a>
-                                <a href="#" class="item">Keluar</a>
+                                <a href="/logout" class="item">Keluar</a>
                             </div>
                         </div>
                     </div>

@@ -10,9 +10,18 @@ use App\Http\Controllers\TransactionController;
 
 // landing
 Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'post_login']);
+
 Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/register', [AuthController::class, 'post_register']);
+
 Route::get('/forgot-password', [AuthController::class, 'forgot_password'])->name('forgot-password');
+Route::post('/forgot-password', [AuthController::class, 'post_forgot_password']);
+
 Route::get('/reset-password', [AuthController::class, 'reset_password'])->name('reset-password');
+Route::post('/reset-password', [AuthController::class, 'post_reset_password']);
+
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

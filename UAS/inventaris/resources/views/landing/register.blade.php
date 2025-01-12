@@ -1,19 +1,22 @@
 @extends('landing.base')
 
 @section('content')
-<div class='h-screen bg-red-100'>
+<div class='h-screen'>
     <div class='w-full h-full flex items-center justify-center'>
         <div class='w-[400px]'>
             <h1 class='font-semibold text-[34px] text-center'>Daftar</h1>
-            <div class="ui negative message">
 
-            <div class="header">
-                Data tidak lengkap!
+            @if(isset($error))
+            <div class="ui negative message">
+                <div class="header">
+                    Data tidak lengkap!
+                </div>
+                <p>Harap perika kembali data-data yang Anda isi</p>
             </div>
-            <p>Harap perika kembali data-data yang Anda isi
-            </p></div>
+            @endif
             
-            <form class="ui form">
+            <form class="ui form" method="POST">
+                @csrf
                 <div class="field">
                     <label>Nama</label>
                     <input type="text" name="name" placeholder="Jhon">
@@ -28,7 +31,7 @@
                 </div>
                 <div class="field">
                     <label>Kode aktivasi</label>
-                    <input type="text" name="activation-code" placeholder="">
+                    <input type="text" name="activation_code" placeholder="">
                 </div>
                 <button class="ui fluid button primary" type="submit">Daftar</button>
                 <div class='ui horizontal divider'>atau</div>
