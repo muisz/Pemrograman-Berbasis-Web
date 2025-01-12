@@ -9,17 +9,18 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\InventarisController;
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 
-Route::get('/inventaris', [ItemController::class, 'index'])->name('list');
-Route::get('/inventaris/add', [ItemController::class, 'add']);
-Route::post('/inventaris/add', [ItemController::class, 'addItem']);
-Route::get('/inventaris/detail/{id}', [ItemController::class, 'detail']);
-Route::get('/inventaris/delete/{id}', [ItemController::class, 'delete']);
-Route::post('/inventaris/edit/{id}', [ItemController::class, 'edit']);
+// Route::get('/inventaris', [ItemController::class, 'index'])->name('list');
+// Route::get('/inventaris/add', [ItemController::class, 'add']);
+// Route::post('/inventaris/add', [ItemController::class, 'addItem']);
+// Route::get('/inventaris/detail/{id}', [ItemController::class, 'detail']);
+// Route::get('/inventaris/delete/{id}', [ItemController::class, 'delete']);
+// Route::post('/inventaris/edit/{id}', [ItemController::class, 'edit']);
 
 Route::get('/user', [UserController::class, 'index'])->name('users');
 Route::get('/user/add', [UserController::class, 'add'])->name('add-user');
@@ -59,4 +60,4 @@ Route::get('/barang/detail/{id}', [BarangController::class, 'detail'])->name('de
 Route::post('/barang/edit/{id}', [BarangController::class, 'editBarang']);
 Route::get('/barang/delete/{id}', [BarangController::class, 'hapusBarang']);
 
-// Route::get('/inventaris', [InventarisController::class, 'index'])->name('inventaris');
+Route::get('/inventaris', [InventarisController::class, 'index'])->name('inventaris');

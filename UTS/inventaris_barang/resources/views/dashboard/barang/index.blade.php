@@ -77,8 +77,8 @@
                 <tr>
                     <td>{{ $barang->id }}</td>
                     <td><a href="/barang/detail/{{ $barang->id }}">{{ $barang->name }}</a></td>
-                    <td>Laptop</td>
-                    <td>Ibox</td>
+                    <td>{{ $barang->kategori->name }}</td>
+                    <td>{{ $barang->supplier->name }}</td>
                     <td>
                         <a href="/barang/detail/{{ $barang->id }}?edit=true"><button type="button" class="btn btn-secondary btn-sm">Edit</button></a>
                         <a href="/barang/delete/{{ $barang->id }}"><button type="button" class="btn btn-danger btn-sm">Hapus</button></a>
