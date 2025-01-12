@@ -62,17 +62,7 @@
 <div class="p-3">
     <h1 class="text-[20px] font-semibold">Items</h1>
 
-    <div class="flex justify-between">
-        <form class="ui form mt-6">
-            <div class="field w-[200px]">
-                <select class="ui fluid dropdown">
-                    <option value="">Filter Kategori</option>
-                    <option value="AL">Alabama</option>
-                    <option value="AK">Alaska</option>
-                    <option value="AZ">Arizona</option>
-                </select>
-            </div>
-        </form>
+    <div class="flex justify-end">
         <a href="/items/add"><button class="ui primary button"><i class="plus square icon"></i> Tambah Item</button></a>
     </div>
 
@@ -87,17 +77,24 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($items as $item)
             <tr>
-                <td data-label="Tanggal Input">12 Januari 2025 10:20</td>
-                <td data-label="Nama">Iphone 11</td>
+                <td data-label="Tanggal Input">{{ $item->created_at }}</td>
+                <td data-label="Nama">{{ $item->name }}</td>
                 <td data-label="Jenis">
-                    <div class="ui label">IPhone</div>
+                    @php
+                        $categories = explode(',', $item->kategori);
+                    @endphp
+                    @foreach ($categories as $category)
+                    <div class="ui label">{{ $category }}</div>
+                    @endforeach
                 </td>
-                <td data-label="Total">100</td>
+                <td data-label="Total">{{ $item->total }}</td>
                 <td data-label="">
-                    <a href="/items/1"><button class="ui button">Lihat detail</button></a>
+                    <a href="/items/{{ $item->id }}"><button class="ui button">Lihat detail</button></a>
                 </td>
             </tr>
+            @endforeach
         </tbody>
         <tfoot>
             <tr>
@@ -107,9 +104,6 @@
                             <i class="left chevron icon"></i>
                         </a>
                         <a class="item active">1</a>
-                        <a class="item">2</a>
-                        <a class="item">3</a>
-                        <a class="item">4</a>
                         <a class="icon item">
                             <i class="right chevron icon"></i>
                         </a>

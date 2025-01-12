@@ -44,9 +44,16 @@ Route::get('/items', [ItemController::class, 'index'])
 Route::get('/items/add', [ItemController::class, 'add'])
     ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG)
     ->name('add-item');
+Route::post('/items/add', [ItemController::class, 'post_add'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG);
 Route::get('/items/{id}', [ItemController::class, 'detail'])
     ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG)
     ->name('detail-item');
+Route::get('/items/{id}/edit', [ItemController::class, 'edit'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG)
+    ->name('edit-item');
+Route::post('/items/{id}/edit', [ItemController::class, 'post_edit'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG);
 
 // Transactions
 Route::get('/transactions', [TransactionController::class, 'index'])

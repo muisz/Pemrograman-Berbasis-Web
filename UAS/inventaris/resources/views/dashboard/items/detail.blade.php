@@ -53,7 +53,7 @@
     <div class="ui breadcrumb">
         <div class="section">Items</div>
         <div class="divider"> / </div>
-        <div class="active section">IPhone 11</div>
+        <div class="active section">Detail Item</div>
     </div>
 </div>
 
@@ -63,39 +63,34 @@
 
 <div class="p-3">
     <div class="flex items-center justify-between">
-        <h1 class="text-[20px] font-semibold mb-6">IPhone 11</h1>
+        <h1 class="text-[20px] font-semibold mb-6">{{ $item->name }}</h1>
         <div>
-            <a href="#"><button class="ui button"><i class="box icon"></i>Asripkan</button></a>
-            <a href="#"><button class="ui button"><i class="pencil icon"></i>Ubah</button></a>
+            <a href="/items/{{ $item->id }}/edit"><button class="ui button"><i class="pencil icon"></i>Ubah</button></a>
         </div>
     </div>
     <div class="flex flex-col gap-2">
         <div class="flex">
             <div class="w-[200px] font-medium">Nama</div>
-            <div class="flex-1 text-slate-500">IPhone 11</div>
+            <div class="flex-1 text-slate-500">{{ $item->name }}</div>
         </div>
         <div class="flex">
             <div class="w-[200px] font-medium">Deskripsi</div>
-            <div class="flex-1 text-slate-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.            </div>
+            <div class="flex-1 text-slate-500">{{ $item->deskripsi }}</div>
         </div>
         <div class="flex">
             <div class="w-[200px] font-medium">Kategori</div>
             <div class="flex-1 text-slate-500">
-                <div class="ui label">IPhone</div>
-                <div class="ui label">Smartphone</div>
+                @php
+                    $categories = explode(',', $item->kategori);
+                @endphp
+                @foreach ($categories as $category)
+                <div class="ui label">{{ $category }}</div>
+                @endforeach
             </div>
         </div>
         <div class="flex">
             <div class="w-[200px] font-medium">Total Tersedia</div>
-            <div class="flex-1 text-slate-500">100 Unit</div>
-        </div>
-        <div class="flex">
-            <div class="w-[200px] font-medium">Status</div>
-            <div class="flex-1 text-slate-500">
-                <div class="ui green label">Tersedia</div>
-                <div class="ui red label">Tidak tersedia</div>
-                <div class="ui brown label">Diarsipkan</div>
-            </div>
+            <div class="flex-1 text-slate-500">{{ $item->total }} Unit</div>
         </div>
     </div>
 

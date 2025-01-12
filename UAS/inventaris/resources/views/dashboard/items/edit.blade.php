@@ -53,7 +53,7 @@
     <div class="ui breadcrumb">
         <div class="section">Items</div>
         <div class="divider"> / </div>
-        <div class="active section">Tambah Item</div>
+        <div class="active section">Ubah Item</div>
     </div>
 </div>
 
@@ -62,21 +62,21 @@
 @section('content')
 
 <div class="p-3">
-    <h1 class="text-[20px] font-semibold mb-6">Tambah Item</h1>
+    <h1 class="text-[20px] font-semibold mb-6">Ubah Item</h1>
 
     <form class="ui form mt-6" method="POST">
         @csrf
         <div class="field">
             <label>Nama</label>
-            <input type="text" name="name" placeholder="">
+            <input type="text" name="name" placeholder="" value="{{ $item->name }}">
         </div>
         <div class="field">
             <label>Deskripsi</label>
-            <textarea name="deskripsi"></textarea>
+            <textarea name="deskripsi">{{ $item->deskripsi }}</textarea>
         </div>
         <div class="field">
             <label>Kategori</label>
-            <textarea rows="2" name="kategori"></textarea>
+            <textarea rows="2" name="kategori">{{ $item->kategori }}</textarea>
         </div>
         <button type="submit" class="ui primary button">Submit</button>
     </form>
