@@ -76,15 +76,17 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($suppliers as $supplier)
             <tr>
-                <td data-label="Tanggal Input">12 Januari 2025 10:20</td>
-                <td data-label="Nama">IBox</td>
-                <td data-label="Keterangan">Supplier IPhone</td>
+                <td data-label="Tanggal Input">{{ $supplier->created_at }}</td>
+                <td data-label="Nama">{{ $supplier->name }}</td>
+                <td data-label="Keterangan">{{ $supplier->keterangan }}</td>
                 <td data-label="">
-                    <a href="/suppliers/1/edit"><button class="ui icon button"><i class="pencil icon"></i></button></a>
-                    <a href="/suppliers/1/delete"><button class="ui icon red button"><i class="trash icon"></i></button></a>
+                    <a href="/suppliers/{{ $supplier->id }}/edit"><button class="ui icon button"><i class="pencil icon"></i></button></a>
+                    <a href="/suppliers/{{ $supplier->id }}/delete"><button class="ui icon red button"><i class="trash icon"></i></button></a>
                 </td>
             </tr>
+            @endforeach
         </tbody>
         <tfoot>
             <tr>
@@ -94,9 +96,6 @@
                             <i class="left chevron icon"></i>
                         </a>
                         <a class="item active">1</a>
-                        <a class="item">2</a>
-                        <a class="item">3</a>
-                        <a class="item">4</a>
                         <a class="icon item">
                             <i class="right chevron icon"></i>
                         </a>

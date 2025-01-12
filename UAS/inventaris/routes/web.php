@@ -34,6 +34,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 Route::get('/profile', [DashboardController::class, 'profile'])
     ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG)
     ->name('profile');
+Route::post('/profile', [DashboardController::class, 'post_profile'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG);
 
 // items
 Route::get('/items', [ItemController::class, 'index'])
@@ -73,9 +75,13 @@ Route::get('/suppliers', [SupplierController::class, 'index'])
 Route::get('/suppliers/add', [SupplierController::class, 'add'])
     ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN)
     ->name('add-supplier');
+Route::post('/suppliers/add', [SupplierController::class, 'post_add'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN);
 Route::get('/suppliers/{id}/edit', [SupplierController::class, 'edit'])
     ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN)
     ->name('edit-supplier');
+Route::post('/suppliers/{id}/edit', [SupplierController::class, 'post_edit'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN);
 Route::get('/suppliers/{id}/delete', [SupplierController::class, 'delete'])
     ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN)
     ->name('delete-supplier');
@@ -87,9 +93,13 @@ Route::get('/users', [UserController::class, 'index'])
 Route::get('/users/add', [UserController::class, 'add'])
     ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN)
     ->name('add-user');
+Route::post('/users/add', [UserController::class, 'post_add'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN);
 Route::get('/users/{id}/edit', [UserController::class, 'edit'])
     ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN)
     ->name('edit-user');
+Route::post('/users/{id}/edit', [UserController::class, 'post_edit'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN);
 Route::get('/users/{id}/delete', [UserController::class, 'delete'])
     ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN)
     ->name('delete-user');

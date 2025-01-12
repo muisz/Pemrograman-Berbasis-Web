@@ -64,26 +64,27 @@
 <div class="p-3">
     <h1 class="text-[20px] font-semibold mb-6">Ubah User</h1>
 
-    <form class="ui form mt-6">
+    <form class="ui form mt-6" method="POST">
+        @csrf
         <div class="field">
             <label>Nama</label>
-            <input type="text" name="name" placeholder="">
+            <input type="text" name="name" placeholder="" value="{{ $selected_user->name }}">
         </div>
         <div class="field">
             <label>Email</label>
-            <input type="email" name="email" placeholder="">
+            <input type="email" name="email" placeholder="" value="{{ $selected_user->email }}">
         </div>
         <div class="field">
             <label>Role</label>
-            <select class="ui fluid dropdown">
+            <select class="ui fluid dropdown" name="role" value="{{ $selected_user->role }}">
                 <option value="">-- Pilih role --</option>
-                <option value="AL">Super Admin</option>
-                <option value="AK">Admin Gudang</option>
+                <option value="super_admin">Super Admin</option>
+                <option value="admin_gudang">Admin Gudang</option>
             </select>
         </div>
         <div class="field">
             <label>Kata sandi baru</label>
-            <input type="password" name="password" placeholder="">
+            <input type="password" name="new_password" placeholder="">
         </div>
         <button type="submit" class="ui primary button">Submit</button>
         <a href="/users"><button type="button" class="ui button">Batalkan</button></a>

@@ -64,14 +64,15 @@
 <div class="p-3">
     <h1 class="text-[20px] font-semibold mb-6">Tambah Supplier</h1>
 
-    <form class="ui form mt-6">
+    <form class="ui form mt-6" method="POST">
+        @csrf
         <div class="field">
             <label>Nama</label>
             <input type="text" name="name" placeholder="">
         </div>
         <div class="field">
             <label>Keterangan</label>
-            <textarea></textarea>
+            <textarea name="keterangan"></textarea>
         </div>
         <button type="submit" class="ui primary button">Submit</button>
     </form>

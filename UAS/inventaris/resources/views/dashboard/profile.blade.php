@@ -66,22 +66,23 @@
     <div class="flex flex-col gap-2">
         <div class="flex">
             <div class="w-[200px] font-medium">Nama</div>
-            <div class="flex-1 text-slate-500">Muhamad Abdul Muis</div>
+            <div class="flex-1 text-slate-500">{{ $user->name }}</div>
         </div>
         <div class="flex">
             <div class="w-[200px] font-medium">Email</div>
-            <div class="flex-1 text-slate-500">muis@email.com</div>
+            <div class="flex-1 text-slate-500">{{ $user->email }}</div>
         </div>
         <div class="flex">
             <div class="w-[200px] font-medium">Role</div>
-            <div class="flex-1 text-slate-500">Super Admin</div>
+            <div class="flex-1 text-slate-500">{{ $user->role }}</div>
         </div>
         <div class="flex">
             <div class="w-[200px] font-medium">Kata sandi</div>
             <div class="flex-1 text-slate-500">
-                <form class="ui form">
+                <form class="ui form" method="POST">
+                    @csrf
                     <div class="inline field">
-                        <input type="password" name="password" />
+                        <input type="password" name="new_password" />
                     </div>
                     <button type="submit" class="ui button">Ubah kata sandi</button>
                 </form>

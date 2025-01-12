@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\ActivationCode;
 use App\Models\ForgotPasswordToken;
 use App\Utils\Role;
 use App\Utils\LocalSession;
-use Illuminate\Support\Facades\Hash;
+use App\Utils\Token;
 
 class AuthController extends Controller
 {
@@ -28,6 +29,8 @@ class AuthController extends Controller
         }
 
         LocalSession::set_user($user);
+        if ($user->role == Role::$ADMIN_GUDANG)
+            return redirect()->route('transactions');
         return redirect()->route('dashboard');
     }
 
@@ -74,7 +77,7 @@ class AuthController extends Controller
         
         $token = new ForgotPasswordToken();
         $token->destination = $email;
-        $token->token = $this->get_forgot_password_token();
+        $token->token = Token::generate();
         $token->save();
         return view('landing.forgot-password')->with('success', true);
     }
@@ -120,7 +123,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         LocalSession::clear();
-        return view('landing.login');
+        return redirect()->route('login');
     }
 
     
@@ -147,11 +150,6 @@ class AuthController extends Controller
             }
         }
         return null;
-    }
-
-    public function get_forgot_password_token()
-    {
-        return bin2hex(random_bytes(32 / 2));
     }
 }
 

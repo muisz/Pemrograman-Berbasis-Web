@@ -64,7 +64,8 @@
 <div class="p-3">
     <h1 class="text-[20px] font-semibold mb-6">Tambah User</h1>
 
-    <form class="ui form mt-6">
+    <form class="ui form mt-6" method="POST">
+        @csrf
         <div class="field">
             <label>Nama</label>
             <input type="text" name="name" placeholder="">
@@ -75,10 +76,10 @@
         </div>
         <div class="field">
             <label>Role</label>
-            <select class="ui fluid dropdown">
+            <select class="ui fluid dropdown" name="role">
                 <option value="">-- Pilih role --</option>
-                <option value="AL">Super Admin</option>
-                <option value="AK">Admin Gudang</option>
+                <option value="super_admin">Super Admin</option>
+                <option value="admin_gudang">Admin Gudang</option>
             </select>
         </div>
         <button type="submit" class="ui primary button">Submit</button>

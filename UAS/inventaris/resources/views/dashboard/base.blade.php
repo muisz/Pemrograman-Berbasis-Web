@@ -40,7 +40,7 @@
                                 <div class="bg-slate-500 w-[30px] h-[30px] rounded-full flex justify-center">
                                 </div>
                                 <div class="">
-                                    <p class="font-medium">Muhamad Abdul Muis<br /><span class="text-sm font-light">Super Admin</span></p>
+                                    <p class="font-medium">{{ $user->name }}<br /><span class="text-sm font-light">{{ $user->role }}</span></p>
                                 </div>
                             </div>
                             <div class="menu">

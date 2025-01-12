@@ -77,16 +77,18 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($users as $u)
             <tr>
-                <td data-label="Tanggal Input">12 Januari 2025 10:20</td>
-                <td data-label="Nama">Muhamad Abdul Muis</td>
-                <td data-label="Email">muis@email.com</td>
-                <td data-label="Role">Super Admin</td>
+                <td data-label="Tanggal Input">{{ $u->created_at }}</td>
+                <td data-label="Nama">{{ $u->name }}</td>
+                <td data-label="Email">{{ $u->email }}</td>
+                <td data-label="Role">{{ $u->role }}</td>
                 <td data-label="">
-                    <a href="/users/1/edit"><button class="ui icon button"><i class="pencil icon"></i></button></a>
-                    <a href="/users/1/delete"><button class="ui icon red button"><i class="trash icon"></i></button></a>
+                    <a href="/users/{{ $u->id }}/edit"><button class="ui icon button"><i class="pencil icon"></i></button></a>
+                    <a href="/users/{{ $u->id }}/delete"><button class="ui icon red button"><i class="trash icon"></i></button></a>
                 </td>
             </tr>
+            @endforeach
         </tbody>
         <tfoot>
             <tr>
@@ -96,9 +98,6 @@
                             <i class="left chevron icon"></i>
                         </a>
                         <a class="item active">1</a>
-                        <a class="item">2</a>
-                        <a class="item">3</a>
-                        <a class="item">4</a>
                         <a class="icon item">
                             <i class="right chevron icon"></i>
                         </a>
