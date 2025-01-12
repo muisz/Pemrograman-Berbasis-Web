@@ -62,16 +62,19 @@
 <div class="p-3">
     <h1 class="text-[20px] font-semibold">Items</h1>
 
-    <form class="ui form mt-6">
-        <div class="field w-[200px]">
-            <select class="ui fluid dropdown">
-                <option value="">Filter Kategori</option>
-                <option value="AL">Alabama</option>
-                <option value="AK">Alaska</option>
-                <option value="AZ">Arizona</option>
-            </select>
-        </div>
-    </form>
+    <div class="flex justify-between">
+        <form class="ui form mt-6">
+            <div class="field w-[200px]">
+                <select class="ui fluid dropdown">
+                    <option value="">Filter Kategori</option>
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                </select>
+            </div>
+        </form>
+        <a href="/items/add"><button class="ui primary button"><i class="plus square icon"></i> Tambah Item</button></a>
+    </div>
 
     <table class="ui selectable celled table">
         <thead>

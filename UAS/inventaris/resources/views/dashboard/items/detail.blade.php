@@ -64,7 +64,10 @@
 <div class="p-3">
     <div class="flex items-center justify-between">
         <h1 class="text-[20px] font-semibold mb-6">IPhone 11</h1>
-        <a href="#"><button class="ui button"><i class="box icon"></i>Asripkan</button></a>
+        <div>
+            <a href="#"><button class="ui button"><i class="box icon"></i>Asripkan</button></a>
+            <a href="#"><button class="ui button"><i class="pencil icon"></i>Ubah</button></a>
+        </div>
     </div>
     <div class="flex flex-col gap-2">
         <div class="flex">
@@ -103,23 +106,16 @@
                 <tr>
                     <th>Id</th>
                     <th>Nama</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td data-label="Tanggal Input">1</td>
                     <td data-label="Nama">IBox</td>
-                    <td data-label="">
-                        <a href="#"><button class="ui button">Lihat detail</button></a>
-                    </td>
                 </tr>
                 <tr>
                     <td data-label="Tanggal Input">1</td>
                     <td data-label="Nama">Digimap</td>
-                    <td data-label="">
-                        <a href="#"><button class="ui button">Lihat detail</button></a>
-                    </td>
                 </tr>
             </tbody>
         </table>

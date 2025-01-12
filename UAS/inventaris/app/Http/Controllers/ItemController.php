@@ -15,6 +15,11 @@ class ItemController extends Controller
     {
         return view('dashboard.items.detail');
     }
+
+    public function add(Request $request)
+    {
+        return view('dashboard.items.add');
+    }
 }
 
 ?>

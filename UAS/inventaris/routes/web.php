@@ -16,4 +16,5 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 // items
 Route::get('/items', [ItemController::class, 'index'])->name('items');
+Route::get('/items/add', [ItemController::class, 'add'])->name('add-item');
 Route::get('/items/{id}', [ItemController::class, 'detail'])->name('detail-item');
