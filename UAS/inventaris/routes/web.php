@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\UserController;
 
 // landing
 Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -14,6 +15,9 @@ Route::get('/reset-password', [AuthController::class, 'reset_password'])->name('
 
 // dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+// Profile
+Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
 
 // items
 Route::get('/items', [ItemController::class, 'index'])->name('items');
@@ -25,3 +29,9 @@ Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers'
 Route::get('/suppliers/add', [SupplierController::class, 'add'])->name('add-supplier');
 Route::get('/suppliers/{id}/edit', [SupplierController::class, 'edit'])->name('edit-supplier');
 Route::get('/suppliers/{id}/delete', [SupplierController::class, 'delete'])->name('delete-supplier');
+
+// Users
+Route::get('/users', [UserController::class, 'index'])->name('users');
+Route::get('/users/add', [UserController::class, 'add'])->name('add-user');
+Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('edit-user');
+Route::get('/users/{id}/delete', [UserController::class, 'delete'])->name('delete-user');

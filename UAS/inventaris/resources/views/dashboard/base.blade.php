@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                             <div class="menu">
-                                <a href="#" class="item w-[150px]">Profil</a>
+                                <a href="/profile" class="item w-[150px]">Profil</a>
                                 <a href="#" class="item">Keluar</a>
                             </div>
                         </div>

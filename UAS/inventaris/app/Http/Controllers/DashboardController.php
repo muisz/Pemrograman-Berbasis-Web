@@ -10,6 +10,11 @@ class DashboardController extends Controller
     {
         return view('dashboard.index');
     }
+
+    public function profile(Request $request)
+    {
+        return view('dashboard.profile');
+    }
 }
 
 ?>
