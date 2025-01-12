@@ -79,42 +79,24 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($transactions as $transaction)
             <tr>
-                <td data-label="Tanggal Input">12 Januari 2025 10:20</td>
-                <td data-label="Tanggal Transaksi">12 Januari 2025 10:20</td>
-                <td data-label="Nama">Pemesanan Pemenuhan Kebutuhan Smartphone</td>
+                <td data-label="Tanggal Input">{{ $transaction->created_at }}</td>
+                <td data-label="Tanggal Transaksi">{{ $transaction->tanggal_transaksi }}</td>
+                <td data-label="Nama">{{ $transaction->name }}</td>
                 <td data-label="Jenis">
+                    @if ($transaction->jenis_transaksi == 'masuk')
                     <div class="ui brown label">Transaksi Masuk</div>
-                </td>
-                <td data-label="Total">100</td>
-                <td data-label="">
-                    <a href="/transactions/1"><button class="ui button">Lihat detail</button></a>
-                </td>
-            </tr>
-            <tr>
-                <td data-label="Tanggal">12 Januari 2025 10:20</td>
-                <td data-label="Tanggal Transaksi">12 Januari 2025 10:20</td>
-                <td data-label="Nama">Pemesanan Pemenuhan Kebutuhan Smartphone</td>
-                <td data-label="Jenis">
+                    @else
                     <div class="ui grey label">Transaksi Keluar</div>
+                    @endif
                 </td>
-                <td data-label="Total">100</td>
+                <td data-label="Total">{{ $transaction->total }}</td>
                 <td data-label="">
-                    <a href="/transactions/1"><button class="ui button">Lihat detail</button></a>
+                    <a href="/transactions/{{ $transaction->id }}"><button class="ui button">Lihat detail</button></a>
                 </td>
             </tr>
-            <tr>
-                <td data-label="Tanggal">12 Januari 2025 10:20</td>
-                <td data-label="Tanggal Transaksi">12 Januari 2025 10:20</td>
-                <td data-label="Nama">Pemesanan Pemenuhan Kebutuhan Smartphone</td>
-                <td data-label="Jenis">
-                    <div class="ui brown label">Transaksi Masuk</div>
-                </td>
-                <td data-label="Total">100</td>
-                <td data-label="">
-                    <a href="/transactions/1"><button class="ui button">Lihat detail</button></a>
-                </td>
-            </tr>
+            @endforeach
         </tbody>
         <tfoot>
             <tr>
@@ -124,9 +106,6 @@
                             <i class="left chevron icon"></i>
                         </a>
                         <a class="item active">1</a>
-                        <a class="item">2</a>
-                        <a class="item">3</a>
-                        <a class="item">4</a>
                         <a class="icon item">
                             <i class="right chevron icon"></i>
                         </a>

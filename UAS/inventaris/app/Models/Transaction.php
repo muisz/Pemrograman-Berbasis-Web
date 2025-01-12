@@ -6,16 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\TransactionItem;
 
-class Supplier extends Model
+class Transaction extends Model
 {
     use HasFactory;
-
+    
     protected $fillable = [
         'name',
-        'keterangan',
+        'deskripsi',
+        'tanggal_transaksi',
+        'jenis_transaksi',
+        'total',
     ];
 
-    public function transaction_items()
+    public function items()
     {
         return $this->hasMany(TransactionItem::class);
     }

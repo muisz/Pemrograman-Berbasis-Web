@@ -64,7 +64,8 @@
 <div class="p-3">
     <h1 class="text-[20px] font-semibold mb-6">Tambah Transaksi Masuk</h1>
 
-    <form class="ui form mt-6">
+    <form class="ui form mt-6" method="POST">
+        @csrf
         <div class="field">
             <label>Nama</label>
             <input type="text" name="name" placeholder="">
@@ -75,7 +76,7 @@
         </div>
         <div class="field">
             <label>Tanggal Transaksi</label>
-            <input type="datetime-local" name="date" placeholder="">
+            <input type="date" name="date" placeholder="">
         </div>
         <div class="field">
             <label>Daftar Item</label>
@@ -107,22 +108,36 @@
 
 let itemCount = 0;
 
+let arrayOfItems = @json($items);
+let arrayOfSuppliers = @json($suppliers);
+
+let htmlItems = "";
+let htmlSuppliers = "";
+
+arrayOfItems.forEach(item => {
+    htmlItems += `<option value="${item.id}">${item.name}</option>`;
+});
+
+arrayOfSuppliers.forEach(supplier => {
+    htmlSuppliers += `<option value="${supplier.id}">${supplier.name}</option>`;
+});
+
 function onAddItem()
 {
     $('#daftar-item').append(`<tr id="item-${itemCount}">
                         <td data-label="Nama">
-                            <select class="ui fluid dropdown" name="item[${itemCount}].item_id">
+                            <select class="ui fluid dropdown" name="item[${itemCount}][item_id]">
                                 <option value="">-- Pilih item --</option>
-                                <option value="AL">Super Admin</option>
+                                ${htmlItems}
                             </select>
                         </td>
                         <td data-label="Total">
-                            <input type="number" name="item[${itemCount}].total" />
+                            <input type="number" name="item[${itemCount}][total]" />
                         </td>
                         <td data-label="Supplier">
-                            <select class="ui fluid dropdown" name="item[${itemCount}].supplier_id">
+                            <select class="ui fluid dropdown" name="item[${itemCount}][supplier_id]">
                                 <option value="">-- Pilih item --</option>
-                                <option value="AL">Super Admin</option>
+                                ${htmlSuppliers}
                             </select>
                         </td>
                         <td data-label="">

@@ -53,7 +53,7 @@
     <div class="ui breadcrumb">
         <div class="section">Transaksi</div>
         <div class="divider"> / </div>
-        <div class="active section">Pemesanan Pemenuhan Kebutuhan Smartphone</div>
+        <div class="active section">Detail Transaksi</div>
     </div>
 </div>
 
@@ -63,32 +63,40 @@
 
 <div class="p-3">
     <div class="flex items-center justify-between">
-        <h1 class="text-[20px] font-semibold mb-6">IPhone 11</h1>
+        <h1 class="text-[20px] font-semibold mb-6">{{ $transaction->name }}</h1>
+        
+        @if ($transaction->jenis_transaksi == 'masuk')
+        <a href="/transactions/{{ $transaction->id }}/edit/in"><button class="ui button"><i class="pencil icon"></i>Ubah</button></a>
+        @else
         <a href="#"><button class="ui button"><i class="pencil icon"></i>Ubah</button></a>
+        @endif
     </div>
     <div class="flex flex-col gap-2">
         <div class="flex">
             <div class="w-[200px] font-medium">Nama</div>
-            <div class="flex-1 text-slate-500">Pemesanan Pemenuhan Kebutuhan Smartphone</div>
+            <div class="flex-1 text-slate-500">{{ $transaction->name }}</div>
         </div>
         <div class="flex">
             <div class="w-[200px] font-medium">Deskripsi</div>
-            <div class="flex-1 text-slate-500">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.            </div>
+            <div class="flex-1 text-slate-500">{{ $transaction->deskripsi }}</div>
         </div>
         <div class="flex">
             <div class="w-[200px] font-medium">Jenis Transaksi</div>
             <div class="flex-1 text-slate-500">
+                @if ($transaction->jenis_transaksi == 'masuk')
                 <div class="ui brown label">Transaksi Masuk</div>
+                @else
                 <div class="ui grey label">Transaksi Keluar</div>
+                @endif
             </div>
         </div>
         <div class="flex">
             <div class="w-[200px] font-medium">Tanggal Transaksi</div>
-            <div class="flex-1 text-slate-500">12 Januari 2025 10:20</div>
+            <div class="flex-1 text-slate-500">{{ $transaction->tanggal_transaksi }}</div>
         </div>
         <div class="flex">
             <div class="w-[200px] font-medium">Jumlah Transaksi</div>
-            <div class="flex-1 text-slate-500">100 unit</div>
+            <div class="flex-1 text-slate-500">{{ $transaction->total }} unit</div>
         </div>
     </div>
 
@@ -100,19 +108,22 @@
                     <th>Id</th>
                     <th>Nama</th>
                     <th>Total</th>
+                    @if ($transaction->jenis_transaksi == 'masuk')
+                    <th>Supplier</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
+                @foreach ($transaction->items as $item)
                 <tr>
-                    <td data-label="Id">1</td>
-                    <td data-label="Nama">IPhone 11</td>
-                    <td data-label="Total">10</td>
+                    <td data-label="Id">{{ $item->item->id }}</td>
+                    <td data-label="Nama">{{ $item->item->name }}</td>
+                    <td data-label="Total">{{ $item->total }}</td>
+                    @if ($transaction->jenis_transaksi == 'masuk')
+                    <td data-label="Supplier">{{ $item->supplier->name }}</td>
+                    @endif
                 </tr>
-                <tr>
-                    <td data-label="Id">1</td>
-                    <td data-label="Nama">IPhone 12</td>
-                    <td data-label="Total">10</td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

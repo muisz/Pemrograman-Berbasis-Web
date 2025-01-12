@@ -65,12 +65,16 @@ Route::get('/transactions/{id}', [TransactionController::class, 'detail'])
 Route::get('/transactions/add/in', [TransactionController::class, 'add_in'])
     ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG)
     ->name('add-in-transaction');
+Route::post('/transactions/add/in', [TransactionController::class, 'post_add_in'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG);
 Route::get('/transactions/add/out', [TransactionController::class, 'add_out'])
     ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG)
     ->name('add-out-transaction');
 Route::get('/transactions/{id}/edit/in', [TransactionController::class, 'edit_in'])
     ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG)
     ->name('edit-in-transaction');
+Route::post('/transactions/{id}/edit/in', [TransactionController::class, 'post_edit_in'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG);
 Route::get('/transactions/{id}/edit/out', [TransactionController::class, 'edit_out'])
     ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG)
     ->name('edit-out-transaction');

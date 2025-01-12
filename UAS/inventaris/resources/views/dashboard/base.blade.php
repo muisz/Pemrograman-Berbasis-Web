@@ -23,6 +23,9 @@
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50 overflow-y-auto">
         
+        <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="{{ asset('ui/semantic.js') }}"></script>
+        
         <div class="h-screen">
             <div class="flex h-full">
                 <div class="w-[260px] bg-[#323232] p-3">
@@ -56,8 +59,5 @@
                 </div>
             </div>
         </div>
-
-        <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="{{ asset('ui/semantic.js') }}"></script>
     </body>
 </html>
