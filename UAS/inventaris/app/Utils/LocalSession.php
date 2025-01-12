@@ -16,6 +16,13 @@ class LocalSession
     {
         Session::forget('authenticated_user');
     }
+
+    public static function get_user()
+    {
+        if (Session::has('authenticated_user'))
+            return Session::get('authenticated_user');
+        return null;
+    }
 }
 
 ?>

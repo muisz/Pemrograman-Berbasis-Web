@@ -7,6 +7,8 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Middleware\AuthMiddleware;
+use App\Utils\Role;
 
 // landing
 Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -24,32 +26,70 @@ Route::post('/reset-password', [AuthController::class, 'post_reset_password']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // dashboard
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN)
+    ->name('dashboard');
 
 // Profile
-Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
+Route::get('/profile', [DashboardController::class, 'profile'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG)
+    ->name('profile');
 
 // items
-Route::get('/items', [ItemController::class, 'index'])->name('items');
-Route::get('/items/add', [ItemController::class, 'add'])->name('add-item');
-Route::get('/items/{id}', [ItemController::class, 'detail'])->name('detail-item');
+Route::get('/items', [ItemController::class, 'index'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG)
+    ->name('items');
+Route::get('/items/add', [ItemController::class, 'add'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG)
+    ->name('add-item');
+Route::get('/items/{id}', [ItemController::class, 'detail'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG)
+    ->name('detail-item');
 
 // Transactions
-Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions');
-Route::get('/transactions/{id}', [TransactionController::class, 'detail'])->name('detail-transaction');
-Route::get('/transactions/add/in', [TransactionController::class, 'add_in'])->name('add-in-transaction');
-Route::get('/transactions/add/out', [TransactionController::class, 'add_out'])->name('add-out-transaction');
-Route::get('/transactions/{id}/edit/in', [TransactionController::class, 'edit_in'])->name('edit-in-transaction');
-Route::get('/transactions/{id}/edit/out', [TransactionController::class, 'edit_out'])->name('edit-out-transaction');
+Route::get('/transactions', [TransactionController::class, 'index'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG)
+    ->name('transactions');
+Route::get('/transactions/{id}', [TransactionController::class, 'detail'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG)
+    ->name('detail-transaction');
+Route::get('/transactions/add/in', [TransactionController::class, 'add_in'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG)
+    ->name('add-in-transaction');
+Route::get('/transactions/add/out', [TransactionController::class, 'add_out'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG)
+    ->name('add-out-transaction');
+Route::get('/transactions/{id}/edit/in', [TransactionController::class, 'edit_in'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG)
+    ->name('edit-in-transaction');
+Route::get('/transactions/{id}/edit/out', [TransactionController::class, 'edit_out'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG)
+    ->name('edit-out-transaction');
 
 // Suppliers
-Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers');
-Route::get('/suppliers/add', [SupplierController::class, 'add'])->name('add-supplier');
-Route::get('/suppliers/{id}/edit', [SupplierController::class, 'edit'])->name('edit-supplier');
-Route::get('/suppliers/{id}/delete', [SupplierController::class, 'delete'])->name('delete-supplier');
+Route::get('/suppliers', [SupplierController::class, 'index'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN)
+    ->name('suppliers');
+Route::get('/suppliers/add', [SupplierController::class, 'add'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN)
+    ->name('add-supplier');
+Route::get('/suppliers/{id}/edit', [SupplierController::class, 'edit'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN)
+    ->name('edit-supplier');
+Route::get('/suppliers/{id}/delete', [SupplierController::class, 'delete'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN)
+    ->name('delete-supplier');
 
 // Users
-Route::get('/users', [UserController::class, 'index'])->name('users');
-Route::get('/users/add', [UserController::class, 'add'])->name('add-user');
-Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('edit-user');
-Route::get('/users/{id}/delete', [UserController::class, 'delete'])->name('delete-user');
+Route::get('/users', [UserController::class, 'index'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN)
+    ->name('users');
+Route::get('/users/add', [UserController::class, 'add'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN)
+    ->name('add-user');
+Route::get('/users/{id}/edit', [UserController::class, 'edit'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN)
+    ->name('edit-user');
+Route::get('/users/{id}/delete', [UserController::class, 'delete'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN)
+    ->name('delete-user');
