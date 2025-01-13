@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Models\ActivationCode;
 use App\Models\ForgotPasswordToken;
 use App\Utils\Role;
 use App\Utils\LocalSession;
 use App\Utils\Token;
+use App\Mail\ForgotPasswordEmail;
 
 class AuthController extends Controller
 {
@@ -79,6 +81,9 @@ class AuthController extends Controller
         $token->destination = $email;
         $token->token = Token::generate();
         $token->save();
+
+        Mail::to($email)->send(new ForgotPasswordEmail($email, 'http://inventaris.test/reset-password?token='.$token->token.'&email='.$email));
+
         return view('landing.forgot-password')->with('success', true);
     }
 

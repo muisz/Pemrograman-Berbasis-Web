@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Utils\Token;
+use App\Mail\InviteUserEmail;
 
 class UserController extends Controller
 {
@@ -41,6 +43,9 @@ class UserController extends Controller
         $user->password = $raw_password;
         $user->role = $role;
         $user->save();
+        
+        Mail::to($email)->send(new InviteUserEmail($name, $email, $raw_password));
+
         return redirect()->route('users');
     }
 

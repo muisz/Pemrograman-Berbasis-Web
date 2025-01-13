@@ -2,6 +2,7 @@
 
 @section('menu')
 
+@if($user->role == 'super_admin')
 <ul class="*:my-1">
     <li>
         <a href="/dashboard" class="hover:text-none">
@@ -44,6 +45,26 @@
         </a>
     </li>
 </ul>
+@else
+<ul class="*:my-1">
+    <li>
+        <a href="/items">
+            <div class="group flex gap-2 p-2 rounded bg-slate-100">
+                <i class="boxes icon text-slate-200 text-slate-800"></i>
+                <span class="text-slate-200 font-medium text-slate-800">Items</span>
+            </div>
+        </a>
+    </li>
+    <li>
+        <a href="/transactions">
+            <div class="group flex gap-2 p-2 rounded hover:bg-slate-100">
+                <i class="clipboard check line icon text-slate-200 group-hover:text-slate-800"></i>
+                <span class="text-slate-200 group-hover:font-medium group-hover:text-slate-800">Transaksi</span>
+            </div>
+        </a>
+    </li>
+</ul>
+@endif
 
 @endsection
 
