@@ -70,6 +70,8 @@ Route::post('/transactions/add/in', [TransactionController::class, 'post_add_in'
 Route::get('/transactions/add/out', [TransactionController::class, 'add_out'])
     ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG)
     ->name('add-out-transaction');
+Route::post('/transactions/add/out', [TransactionController::class, 'post_add_out'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG);
 Route::get('/transactions/{id}/edit/in', [TransactionController::class, 'edit_in'])
     ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG)
     ->name('edit-in-transaction');
@@ -78,6 +80,8 @@ Route::post('/transactions/{id}/edit/in', [TransactionController::class, 'post_e
 Route::get('/transactions/{id}/edit/out', [TransactionController::class, 'edit_out'])
     ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG)
     ->name('edit-out-transaction');
+Route::post('/transactions/{id}/edit/out', [TransactionController::class, 'post_edit_out'])
+    ->middleware(AuthMiddleware::class.':'.Role::$SUPER_ADMIN.':'.Role::$ADMIN_GUDANG);
 
 // Suppliers
 Route::get('/suppliers', [SupplierController::class, 'index'])

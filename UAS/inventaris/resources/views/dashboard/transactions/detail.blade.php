@@ -68,7 +68,7 @@
         @if ($transaction->jenis_transaksi == 'masuk')
         <a href="/transactions/{{ $transaction->id }}/edit/in"><button class="ui button"><i class="pencil icon"></i>Ubah</button></a>
         @else
-        <a href="#"><button class="ui button"><i class="pencil icon"></i>Ubah</button></a>
+        <a href="/transactions/{{ $transaction->id }}/edit/out"><button class="ui button"><i class="pencil icon"></i>Ubah</button></a>
         @endif
     </div>
     <div class="flex flex-col gap-2">

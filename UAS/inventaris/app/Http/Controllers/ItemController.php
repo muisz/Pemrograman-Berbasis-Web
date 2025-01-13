@@ -18,8 +18,18 @@ class ItemController extends Controller
     public function detail(Request $request)
     {
         $item = Item::find($request->id);
+        $suppliers = [];
+        foreach ($item->transaction_items as $transaction)
+        {
+            $supplier = $transaction->supplier;
+            if (!in_array($supplier, $suppliers))
+            {
+                $suppliers[] = $supplier;
+            }
+        }
         return view('dashboard.items.detail')
             ->with('item', $item)
+            ->with('suppliers', $suppliers)
             ->with('user', $request->user());
     }
 

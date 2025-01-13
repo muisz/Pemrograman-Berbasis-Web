@@ -88,10 +88,6 @@
                 @endforeach
             </div>
         </div>
-        <div class="flex">
-            <div class="w-[200px] font-medium">Total Tersedia</div>
-            <div class="flex-1 text-slate-500">{{ $item->total }} Unit</div>
-        </div>
     </div>
 
     <div class="mt-6 p-3 border rounded shadow">
@@ -104,14 +100,12 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($suppliers as $supplier)
                 <tr>
-                    <td data-label="Tanggal Input">1</td>
-                    <td data-label="Nama">IBox</td>
+                    <td data-label="Id">{{ $supplier->id }}</td>
+                    <td data-label="Nama">{{ $supplier->name }}</td>
                 </tr>
-                <tr>
-                    <td data-label="Tanggal Input">1</td>
-                    <td data-label="Nama">Digimap</td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

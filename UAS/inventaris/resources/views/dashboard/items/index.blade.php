@@ -72,7 +72,6 @@
                 <th>Tanggal Input</th>
                 <th>Nama</th>
                 <th>Kategori</th>
-                <th>Total Tersedia</th>
                 <th></th>
             </tr>
         </thead>
@@ -89,7 +88,6 @@
                     <div class="ui label">{{ $category }}</div>
                     @endforeach
                 </td>
-                <td data-label="Total">{{ $item->total }}</td>
                 <td data-label="">
                     <a href="/items/{{ $item->id }}"><button class="ui button">Lihat detail</button></a>
                 </td>
@@ -98,7 +96,7 @@
         </tbody>
         <tfoot>
             <tr>
-                <th colspan="5">
+                <th colspan="4">
                     <div class="ui right floated pagination menu">
                         <a class="icon item">
                             <i class="left chevron icon"></i>

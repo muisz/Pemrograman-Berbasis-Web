@@ -64,18 +64,19 @@
 <div class="p-3">
     <h1 class="text-[20px] font-semibold mb-6">Ubah Transaksi Keluar</h1>
 
-    <form class="ui form mt-6">
+    <form class="ui form mt-6" method="POST">
+        @csrf
         <div class="field">
             <label>Nama</label>
-            <input type="text" name="name" placeholder="">
+            <input type="text" name="name" placeholder="" value="{{ $transaction->name }}">
         </div>
         <div class="field">
             <label>Deskripsi</label>
-            <textarea name="description"></textarea>
+            <textarea name="description">{{ $transaction->deskripsi }}</textarea>
         </div>
         <div class="field">
             <label>Tanggal Transaksi</label>
-            <input type="datetime-local" name="date" placeholder="">
+            <input type="date" name="date" placeholder="" value="{{ $transaction->tanggal_transaksi }}">
         </div>
         <div class="field">
             <label>Daftar Item</label>
@@ -98,25 +99,61 @@
                 </tfoot>
             </table>
         </div>
+        <input type="hidden" name="deleted_items" id="deleted_items" />
         <button type="submit" class="ui primary button">Submit</button>
     </form>
 </div>
 
 <script type="text/javascript">
 
+let arrayOfItems = @json($items);
+let arrayOfCurrentItems = @json($transaction->items);
+
 let itemCount = 0;
+    
+let htmlItems = "";
+
+arrayOfItems.forEach(item => {
+    htmlItems += `<option value="${item.id}">${item.name}</option>`;
+});
+
+arrayOfCurrentItems.forEach(item => {
+    let itemOptions = "";
+    let supplierOptions = "";
+
+    arrayOfItems.forEach(i => {
+        itemOptions += `<option value="${i.id}" ${i.id == item.item_id ? 'selected' : ""}>${i.name}</option>`;
+    });
+
+    $('#daftar-item').append(`<tr id="item-${item.id}">
+                        <td data-label="Nama">
+                            <input type="hidden" name="item[${item.id}][id]" value="${item.id}" />
+                            <select class="ui fluid dropdown" name="item[${item.id}][item_id]">
+                                <option value="">-- Pilih item --</option>
+                                ${itemOptions}
+                            </select>
+                        </td>
+                        <td data-label="Total">
+                            <input type="number" name="item[${item.id}][total]" value="${item.total}" />
+                        </td>
+                        <td data-label="">
+                            <button type="button" class="ui icon red button" onclick="onDeleteItem(${item.id})"><i class="trash icon"></i></button>
+                        </td>
+                    </tr>`);
+    itemCount++;
+});
 
 function onAddItem()
 {
     $('#daftar-item').append(`<tr id="item-${itemCount}">
                         <td data-label="Nama">
-                            <select class="ui fluid dropdown" name="item[${itemCount}].item_id">
+                            <select class="ui fluid dropdown" name="item[${itemCount}][item_id]">
                                 <option value="">-- Pilih item --</option>
-                                <option value="AL">Super Admin</option>
+                                ${itemOptions}
                             </select>
                         </td>
                         <td data-label="Total">
-                            <input type="number" name="item[${itemCount}].total" />
+                            <input type="number" name="item[${itemCount}][total]" />
                         </td>
                         <td data-label="">
                             <button type="button" class="ui icon red button" onclick="onDeleteItem(${itemCount})"><i class="trash icon"></i></button>
@@ -127,6 +164,11 @@ function onAddItem()
 
 function onDeleteItem(id)
 {
+    let current_value = $('#deleted_items').val();
+    if (!current_value)
+        current_value = "";
+
+    $('#deleted_items').attr('value', `${current_value},${id}`);
     $(`#item-${id}`).remove();
 }
 

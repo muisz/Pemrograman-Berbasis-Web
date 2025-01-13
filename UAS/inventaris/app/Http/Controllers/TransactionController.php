@@ -58,6 +58,9 @@ class TransactionController extends Controller
             $transaction_item->supplier_id = $item['supplier_id'];
             $transaction_item->save();
             $total += $transaction_item->total;
+
+            $current_total = $transaction_item->item->total;
+            $transaction_item->item->update(['total', $current_total + $transaction_item->total]);
         }
 
         $transaction->update(['total' => $total]);
@@ -72,6 +75,35 @@ class TransactionController extends Controller
             ->with('suppliers', $suppliers)
             ->with('items', $items)
             ->with('user', $request->user());
+    }
+
+    public function post_add_out(Request $request)
+    {   
+        $transaction = new Transaction();
+        $transaction->name = $request->name;
+        $transaction->deskripsi = $request->description;
+        $transaction->tanggal_transaksi = $request->date;
+        $transaction->jenis_transaksi = 'keluar';
+        $transaction->total = 0;
+        $transaction->save();
+
+        $total = 0;
+        foreach ($request->item as $item)
+        {
+            $transaction_item = new TransactionItem();
+            $transaction_item->transaction_id = $transaction->id;
+            $transaction_item->item_id = $item['item_id'];
+            $transaction_item->total = $item['total'];
+            $transaction_item->supplier_id = null;
+            $transaction_item->save();
+            $total += $transaction_item->total;
+            
+            $current_total = $transaction_item->item->total;
+            $transaction_item->item->update(['total', $current_total - $transaction_item->total]);
+        }
+
+        $transaction->update(['total' => $total]);
+        return redirect()->route('transactions');
     }
 
     public function edit_in(Request $request)
@@ -139,7 +171,63 @@ class TransactionController extends Controller
     
     public function edit_out(Request $request)
     {
-        return view('dashboard.transactions.edit-out')->with('user', $request->user());
+        $items = Item::all();
+        $suppliers = Supplier::all();
+        $transaction = Transaction::find($request->id);
+        return view('dashboard.transactions.edit-out')
+            ->with('transaction', $transaction)
+            ->with('suppliers', $suppliers)
+            ->with('items', $items)
+            ->with('user', $request->user());
+    }
+
+    public function post_edit_out(Request $request)
+    {
+        $transaction = Transaction::find($request->id);
+        $total = 0;
+        foreach ($request->item as $item)
+        {
+            if (isset($item['id']))
+            {
+                $transaction_item = TransactionItem::find($item['id']);
+                $transaction_item->update([
+                    'item_id' => $item['item_id'],
+                    'total' => $item['total'],
+                ]);
+            }
+            else
+            {
+                $transaction_item = new TransactionItem();
+                $transaction_item->transaction_id = $transaction->id;
+                $transaction_item->item_id = $item['item_id'];
+                $transaction_item->total = $item['total'];
+                $transaction_item->save();
+            }
+            $total += $transaction_item->total;
+        }
+
+        if ($request->deleted_items)
+        {
+            $deleted_items = explode(',', $request->deleted_items);
+            foreach ($deleted_items as $deleted_id)
+            {
+                $item_id = trim($deleted_id);
+                if ($item_id == "")
+                    continue;
+
+                $t = TransactionItem::find($item_id);
+                if ($t != null)
+                    $t->delete();
+            }
+        }
+
+        $transaction->update([
+            'name' => $request->name,
+            'deskripsi' => $request->description,
+            'tanggal_transaksi' => $request->date,
+            'total' => $total,
+        ]);
+        return redirect()->route('detail-transaction', ['id' => $transaction->id]);
     }
 }
 
