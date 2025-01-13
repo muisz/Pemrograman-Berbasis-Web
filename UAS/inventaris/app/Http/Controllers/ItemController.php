@@ -22,7 +22,7 @@ class ItemController extends Controller
         foreach ($item->transaction_items as $transaction)
         {
             $supplier = $transaction->supplier;
-            if (!in_array($supplier, $suppliers))
+            if (!in_array($supplier, $suppliers) && $supplier != null)
             {
                 $suppliers[] = $supplier;
             }
