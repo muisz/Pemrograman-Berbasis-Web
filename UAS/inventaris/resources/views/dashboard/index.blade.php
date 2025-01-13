@@ -70,22 +70,22 @@
         <div class="border p-3 rounded shadow flex-1">
             <p><i class="boxes line icon"></i></p>
             <p class="text-slate-600 mt-2">Total Items</p>
-            <p class="font-bold text-[22px]">1.000</p>
+            <p class="font-bold text-[22px]">{{ $total_items }}</p>
         </div>
         <div class="border p-3 rounded shadow flex-1">
             <p><i class="clipboard check line icon"></i></p>
             <p class="text-slate-600 mt-2">Total Items Masuk</p>
-            <p class="font-bold text-[22px]">1.000</p>
+            <p class="font-bold text-[22px]">{{ $total_item_in }}</p>
         </div>
         <div class="border p-3 rounded shadow flex-1">
             <p><i class="shipping fast line icon"></i></p>
             <p class="text-slate-600 mt-2">Total Items Keluar</p>
-            <p class="font-bold text-[22px]">1.000</p>
+            <p class="font-bold text-[22px]">{{ $total_item_out }}</p>
         </div>
         <div class="border p-3 rounded shadow flex-1">
             <p><i class="warehouse line icon"></i></p>
             <p class="text-slate-600 mt-2">Total Suppliers</p>
-            <p class="font-bold text-[22px]">1.000</p>
+            <p class="font-bold text-[22px]">{{ $total_suppliers }}</p>
         </div>
     </div>
 
@@ -103,42 +103,24 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($transactions as $transaction)
                 <tr>
-                    <td data-label="Tanggal Input">12 Januari 2025 10:20</td>
-                    <td data-label="Tanggal Transaksi">12 Januari 2025 10:20</td>
-                    <td data-label="Nama">Pemesanan Pemenuhan Kebutuhan Smartphone</td>
+                    <td data-label="Tanggal Input">{{ $transaction->created_at }}</td>
+                    <td data-label="Tanggal Transaksi">{{ $transaction->tanggal_transaksi }}</td>
+                    <td data-label="Nama">{{ $transaction->name }}</td>
                     <td data-label="Jenis">
+                        @if ($transaction->jenis_transaksi == 'masuk')
                         <div class="ui brown label">Transaksi Masuk</div>
-                    </td>
-                    <td data-label="Total">100</td>
-                    <td data-label="">
-                        <a href="#"><button class="ui button">Lihat detail</button></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td data-label="Tanggal">12 Januari 2025 10:20</td>
-                    <td data-label="Tanggal Transaksi">12 Januari 2025 10:20</td>
-                    <td data-label="Nama">Pemesanan Pemenuhan Kebutuhan Smartphone</td>
-                    <td data-label="Jenis">
+                        @else
                         <div class="ui grey label">Transaksi Keluar</div>
+                        @endif
                     </td>
-                    <td data-label="Total">100</td>
+                    <td data-label="Total">{{ $transaction->total }}</td>
                     <td data-label="">
-                        <a href="#"><button class="ui button">Lihat detail</button></a>
+                        <a href="/transactions/{{ $transaction->id }}"><button class="ui button">Lihat detail</button></a>
                     </td>
                 </tr>
-                <tr>
-                    <td data-label="Tanggal">12 Januari 2025 10:20</td>
-                    <td data-label="Tanggal Transaksi">12 Januari 2025 10:20</td>
-                    <td data-label="Nama">Pemesanan Pemenuhan Kebutuhan Smartphone</td>
-                    <td data-label="Jenis">
-                        <div class="ui brown label">Transaksi Masuk</div>
-                    </td>
-                    <td data-label="Total">100</td>
-                    <td data-label="">
-                        <a href="#"><button class="ui button">Lihat detail</button></a>
-                    </td>
-                </tr>
+                @endforeach
             </tbody>
             <tfoot>
                 <tr>
@@ -148,9 +130,6 @@
                                 <i class="left chevron icon"></i>
                             </a>
                             <a class="item active">1</a>
-                            <a class="item">2</a>
-                            <a class="item">3</a>
-                            <a class="item">4</a>
                             <a class="icon item">
                                 <i class="right chevron icon"></i>
                             </a>
